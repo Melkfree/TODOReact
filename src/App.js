@@ -44,7 +44,7 @@ function App() {
   }
 
   const removePost = (post) => {
-    setPosts(posts.filter(p=> p.id !== post.id))
+    setPosts(posts.filter(p=> p._id !== post._id))
   }
     
   const sortPosts = (sort) => {
@@ -61,8 +61,8 @@ function App() {
         value={selectedSort}
         onChange={sortPosts}
           options={[
-            {value: 'title', name: 'By title'},
-            {value: 'body', name: 'By description'}
+            {value: 'date', name: 'By date'},
+            {value: 'content', name: 'By description'}
         ]} />
       </div>
         {posts.length ?<PostsList remove={removePost} posts={sortedPosts} title="Post List"/>: <h1 style={{textAlign: 'center', verticalAlign: 'end'}}>Posts not found!</h1> }

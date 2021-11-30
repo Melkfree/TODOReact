@@ -3,8 +3,23 @@ import MyButton from "./UI/button/MyButton";
 
 const PostItem = function(props){
 
+    const removePost = (e) =>{
+        e.preventDefault();
+
+        fetch(`http://localhost:5000/todos/remove/${props.post._id}`, {
+            method: 'DELETE',
+        })
+        .then(res => res.json())
+        .then(res => {console.log(res);
+            props.remove(props.post);})
+            
+
+        
+        // 
+    }
+
     return(
-        <div className="post">
+        <div className="post" id={props.post._id} >
             <div className="post__content">
                 {props.number}. 
                 
@@ -12,7 +27,7 @@ const PostItem = function(props){
                 
             </div>
             <div className="post__btns">
-                <MyButton onClick={() => props.remove(props.post)} >Delete</MyButton>
+                <MyButton onClick={removePost} >Delete</MyButton>
             </div>
         </div>
     )

@@ -4,7 +4,7 @@ const indexAction = (req, res) => {
     TodoTask.find({}, (err, tasks) => {
         if (err) return res.send(500, err);
         res.json({ posts : tasks });
-        console.log(tasks);
+        // console.log(tasks);
     });
 }
 
@@ -17,9 +17,11 @@ const addAction = async (req, res) => {
     const todoTask = new TodoTask({
         content: req.body.content
     });
+    console.log(req.body);
+    console.log(todoTask);
     try {
         await todoTask.save();
-        res.json({ todo: todoTask });
+        res.json({ post: todoTask });
     } catch (err) {
         res.status = 500;
     }

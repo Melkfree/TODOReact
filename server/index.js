@@ -9,14 +9,15 @@ const bodyParser = require('body-parser');
 
 dotenv.config();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use("/static", express.static("./public"));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
@@ -30,7 +31,7 @@ mongoose.connect(process.env.DB_CONNECT, (err) => {
 });
 
 // view engine configuration
-app.set('views', './server/views')
+app.set('views', './views')
 app.set("view engine", "ejs");
 
 routes(app);
